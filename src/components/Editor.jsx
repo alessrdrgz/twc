@@ -3,7 +3,7 @@
 import MonacoEditor from '@monaco-editor/react'
 import { configureMonacoTailwindcss, tailwindcssData } from 'monaco-tailwindcss'
 
-export default function Editor ({ html, onChangeHtml }) {
+export default function Editor ({ content, language, onChangeContent }) {
   const handleEditorMount = async (_editor, monaco) => {
     monaco.languages.css.cssDefaults.setOptions({
       data: {
@@ -18,8 +18,8 @@ export default function Editor ({ html, onChangeHtml }) {
 
   return (
     <MonacoEditor
-      defaultLanguage="html"
-      value={html}
+      defaultLanguage={language}
+      value={content}
       theme="vs-dark"
       options={{
         scrollBeyondLastLine: false,
@@ -27,9 +27,8 @@ export default function Editor ({ html, onChangeHtml }) {
           enabled: false
         }
       }}
-      onChange={onChangeHtml}
+      onChange={onChangeContent}
       onMount={handleEditorMount}
-      height="100%"
     />
   )
 }

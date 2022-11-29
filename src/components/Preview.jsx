@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Switch } from '@headlessui/react'
 
-export default function Preview ({ html }) {
+export default function Preview ({ html, tailwindConfig }) {
   const [darkMode, setDarkMode] = useState(true)
   const iFrameRef = useRef(null)
 
@@ -38,13 +38,7 @@ export default function Preview ({ html }) {
         ref={iFrameRef}
         srcDoc={`<script src="https://cdn.tailwindcss.com"></script>
                 <script>
-                  tailwind.config = {
-                    darkMode: 'class',
-                    theme: {
-                      extend: {}
-                    },
-                    plugins: []
-                  }
+                  ${tailwindConfig}
 
                   window.onmessage = (e) => document.body.classList.toggle('dark', e.data)
                   
