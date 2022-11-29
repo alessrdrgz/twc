@@ -3,7 +3,7 @@
 import MonacoEditor from '@monaco-editor/react'
 
 export default function Editor ({ content, language, onChangeContent }) {
-  const handleEditorMount = async (_editor, monaco) => {
+  const handleEditorMount = async (editor, monaco) => {
     const { tailwindcssData, configureMonacoTailwindcss } = (await import('monaco-tailwindcss'))
 
     monaco.languages.css.cssDefaults.setOptions({
@@ -15,22 +15,32 @@ export default function Editor ({ content, language, onChangeContent }) {
     })
 
     configureMonacoTailwindcss(monaco)
+
+    const resizeObserver = new ResizeObserver(() => {
+      editor.layout()
+    })
+
+    resizeObserver.observe(window.document.body)
   }
 
   return (
-    <MonacoEditor
-      defaultLanguage={language}
-      value={content}
-      theme="vs-dark"
-      options={{
-        scrollBeyondLastLine: false,
-        minimap: {
-          enabled: false
-        }
-      }}
-      onChange={onChangeContent}
-      onMount={handleEditorMount}
-    />
+    <div className="relative w-full h-full">
+      <div className="absolute inset-0">
+        <MonacoEditor
+          defaultLanguage={language}
+          value={content}
+          theme="vs-dark"
+          options={{
+            scrollBeyondLastLine: false,
+            minimap: {
+              enabled: false
+            }
+          }}
+          onChange={onChangeContent}
+          onMount={handleEditorMount}
+        />
+      </div>
+    </div>
   )
 }
 
