@@ -20,9 +20,9 @@ export default function Editor ({ html, onChangeHtml }) {
     <MonacoEditor
       defaultLanguage="html"
       value={html}
+      theme="vs-dark"
       options={{
         scrollBeyondLastLine: false,
-        theme: 'vs-dark',
         minimap: {
           enabled: false
         }
