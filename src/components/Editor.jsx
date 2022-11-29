@@ -1,10 +1,11 @@
 'use client'
 
 import MonacoEditor from '@monaco-editor/react'
-import { configureMonacoTailwindcss, tailwindcssData } from 'monaco-tailwindcss'
 
 export default function Editor ({ content, language, onChangeContent }) {
   const handleEditorMount = async (_editor, monaco) => {
+    const { tailwindcssData, configureMonacoTailwindcss } = (await import('monaco-tailwindcss'))
+
     monaco.languages.css.cssDefaults.setOptions({
       data: {
         dataProviders: {
