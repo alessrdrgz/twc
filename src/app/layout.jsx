@@ -5,7 +5,7 @@ export default function RootLayout ({ children }) {
   return (
     <html>
       <head />
-      <body>
+      <body className="bg-gray-800">
         <Header />
         {children}
         </body>
