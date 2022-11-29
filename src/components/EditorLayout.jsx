@@ -21,7 +21,7 @@ export default function EditorLayout () {
             <div className="p-2 mb-1 text-white bg-blue-500 rounded-t">Preview</div>
             <Preview html={html} tailwindConfig={tailwindConfig} />
 
-            <div className="p-2 mb-1 mt-2 text-white bg-yellow-300 rounded-t">Tailwind Config</div>
+            <div className="p-2 mt-2 mb-1 text-white bg-yellow-300 rounded-t">Tailwind Config</div>
             <Editor content={tailwindConfig} language="javascript" onChangeContent={handleChangeTailwindConfig} />
         </div>
       </div>
