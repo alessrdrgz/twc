@@ -5,10 +5,10 @@ export default function RootLayout ({ children }) {
   return (
     <html>
       <head />
-      <body className="bg-gray-800">
+      <body className="fixed inset-0 bg-gray-800">
         <Header />
         {children}
-        </body>
+      </body>
     </html>
   )
 }
