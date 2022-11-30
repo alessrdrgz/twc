@@ -1,5 +1,13 @@
 import dedent from 'dedent'
 
+const defaultConfig = dedent`tailwind.config = {
+                              darkMode: 'class',
+                              theme: {
+                                extend: {}
+                              },
+                              plugins: []
+                            }`
+
 export const TEMPLATES = {
   button: {
     html: dedent`<button class="group flex items-center overflow-hidden rounded-xl border-none bg-[royalblue] py-[0.7em] px-[1em] pl-[0.9em] text-[20px] text-white transition-all duration-200 active:scale-95">
@@ -27,5 +35,12 @@ export const TEMPLATES = {
                     },
                     plugins: []
                   }`
+  },
+  input: {
+    html: dedent`<div class="relative">
+                  <input name="text" required class="peer focus:outline-none valid:outline-none focus:border-sky-500 valid:border-sky-500 rounded-2xl border-2 border-solid border-gray-50 bg-transparent p-4 text-base text-white transition-all duration-150 ease-in-out">
+                  <label class="peer-focus:-translate-y-2/4 peer-focus:scale-90 peer-valid:bg-[#1e1e1e] peer-focus:bg-[#1e1e1e] peer-focus:py-0 peer-focus:px-1 peer-valid:py-0 peer-valid:px-2 peer-focus:text-sky-500 peer-valid:text-sky-500 peer-valid:-translate-y-2/4 peer-valid:scale-90 absolute left-4 text-white pointer-events-none translate-y-4 transition-all duration-150 ease-in-out">Input</label>
+                </div>`,
+    config: defaultConfig
   }
 }
