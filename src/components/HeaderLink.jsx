@@ -2,11 +2,13 @@ import Link from 'next/link'
 
 export default function HeaderLink ({ href, text }) {
   return (
-    <Link
-      href={href}
-      className="block pl-2 mt-4 mr-4 text-white border-l-2 hover:text-sky-300 border-l-transparent lg:inline-block lg:mt-0 hover:border-l-sky-300 lg:border-l-0 lg:pl-0 lg:pt-2 lg:border-t-2 lg:border-t-transparent lg:hover:border-t-sky-300"
-    >
-      {text}
-    </Link>
+    <li>
+      <Link
+        href={href}
+        class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-gray-500 md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-terciary md:bg-transparent  dark:hover:bg-zinc-700 dark:hover:text-white md:dark:hover:bg-transparent"
+      >
+        {text}
+      </Link>
+    </li>
   )
 }
