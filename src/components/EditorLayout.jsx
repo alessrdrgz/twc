@@ -2,15 +2,23 @@
 
 import Editor from '@components/Editor'
 import Preview from '@components/Preview'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TEMPLATES } from '@constants/templates'
+import ComponentSelectorModal from '@components/ComponentSelectorModal'
 
 export default function EditorLayout () {
-  const [html, setHtml] = useState(TEMPLATES.button.html)
-  const [tailwindConfig, setTailwindConfig] = useState(TEMPLATES.button.config)
+  const [currentTemplate, setCurrentTemplate] = useState('button')
+  const [html, setHtml] = useState(TEMPLATES[currentTemplate].html)
+  const [tailwindConfig, setTailwindConfig] = useState(TEMPLATES[currentTemplate].config)
   const handleChangeHtml = (currentHtml) => currentHtml && setHtml(currentHtml)
   const handleChangeTailwindConfig = (currentConfig) => currentConfig && setTailwindConfig(currentConfig)
+
+  useEffect(() => {
+    setHtml(TEMPLATES[currentTemplate].html)
+    setTailwindConfig(TEMPLATES[currentTemplate].config)
+  }, [currentTemplate])
   return (
+    <>
     <div className="flex flex-col h-[calc(100vh-80px)] w-scree">
       <div className="grid h-full lg:grid-cols-[1fr,500px] gap-3 p-4">
         <div className="flex flex-col">
@@ -26,5 +34,8 @@ export default function EditorLayout () {
         </div>
       </div>
     </div>
+
+    <ComponentSelectorModal value={currentTemplate} setValue={setCurrentTemplate} />
+    </>
   )
 }
