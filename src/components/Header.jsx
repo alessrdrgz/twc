@@ -1,60 +1,42 @@
 'use client'
 
 import HeaderLink from '@components/HeaderLink'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { createRef } from 'react'
+import LoginButton from '@components/LoginButton'
+import UserMenu from '@components/UserMenu'
+import HomeIcon from '@mui/icons-material/HomeRounded'
+import SearchIcon from '@mui/icons-material/SearchRounded'
 
 const HeaderLinks = [
   {
     text: 'Home',
-    href: ''
+    href: '/',
+    Icon: HomeIcon
   },
   {
     text: 'Browse',
-    href: ''
+    href: '/browse',
+    Icon: SearchIcon
   }
 ]
 
-export default function Header () {
-  const menu = createRef()
-  const toggleMenu = () => menu.current?.classList.toggle('hidden')
+export default function Header() {
+  const { data: session } = useSession()
 
   return (
-    <header>
-      <nav class=" border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-background relative">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <Link href="https://flowbite.com/" class="flex items-center">
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-secondary">
-              TwC
-            </span>
-          </Link>
-          <button
-            type="button"
-            class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:ring-gray-700 dark:text-white dark:hover:bg-bglight dark:focus:ring-gray-600"
-            onClick={toggleMenu}
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-          <div class="hidden w-full md:block  md:w-auto" ref={menu}>
-            <ul class="flex flex-col p-4 mt-4 rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-basic md:font-medium md:border-0 dark:bg-background md:dark:bg-background dark:border-background">
-              {HeaderLinks.map((h, i) => (
-                <HeaderLink text={h.text} href={h.href} key={i} />
-              ))}
-            </ul>
-          </div>
+    <header className="block font-primary">
+      <div className="relative flex items-center justify-between px-2 py-4 mx-auto md:px-20 bg-background">
+        <Link href="/" className="text-4xl font-bold text-primary font-primary">
+          TWC
+        </Link>
+        {session ? <UserMenu /> : <LoginButton />}
+      </div>
+      <nav className="fixed top-0 bottom-0 right-0 flex items-center justify-center w-16 min-h-screen">
+        <div className="flex flex-col gap-3 shadow-lg rounded-2xl bg-bglight">
+          {HeaderLinks.map(({ href, text, Icon }, i) => (
+            <HeaderLink text={text} href={href} Icon={Icon} key={i} />
+          ))}
         </div>
       </nav>
     </header>

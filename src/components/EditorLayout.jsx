@@ -6,12 +6,15 @@ import { useEffect, useState } from 'react'
 import { TEMPLATES } from '@constants/templates'
 import ComponentSelectorModal from '@components/ComponentSelectorModal'
 
-export default function EditorLayout () {
+export default function EditorLayout() {
   const [currentTemplate, setCurrentTemplate] = useState('button')
   const [html, setHtml] = useState(TEMPLATES[currentTemplate].html)
-  const [tailwindConfig, setTailwindConfig] = useState(TEMPLATES[currentTemplate].config)
+  const [tailwindConfig, setTailwindConfig] = useState(
+    TEMPLATES[currentTemplate].config
+  )
   const handleChangeHtml = (currentHtml) => currentHtml && setHtml(currentHtml)
-  const handleChangeTailwindConfig = (currentConfig) => currentConfig && setTailwindConfig(currentConfig)
+  const handleChangeTailwindConfig = (currentConfig) =>
+    currentConfig && setTailwindConfig(currentConfig)
 
   useEffect(() => {
     setHtml(TEMPLATES[currentTemplate].html)
@@ -19,23 +22,42 @@ export default function EditorLayout () {
   }, [currentTemplate])
   return (
     <>
-    <div className="flex flex-col h-[calc(100vh-80px)] w-scree">
-      <div className="grid h-full lg:grid-cols-[1fr,500px] gap-3 p-4">
-        <div className="flex flex-col">
-          <div className="p-2 mb-1 text-white bg-red-700 rounded-t">HTML</div>
-          <Editor content={html} language="html" onChangeContent={handleChangeHtml} />
-        </div>
-        <div className="flex flex-col">
-            <div className="p-2 mb-1 text-white bg-blue-500 rounded-t">Preview</div>
+      <div className="flex flex-col w-full h-full">
+        <div className="grid h-full lg:grid-cols-[1fr,500px] gap-3 p-4">
+          <div className="flex flex-col">
+            <div className="p-2 text-lg text-white rounded-t-lg bg-primary">
+              HTML
+            </div>
+            <Editor
+              content={html}
+              language="html"
+              onChangeContent={handleChangeHtml}
+            />
+            <div className="bg-[#1e1e1e] rounded-b-lg h-1 w-full p-1" />
+          </div>
+          <div className="flex flex-col">
+            <div className="p-2 text-lg text-white rounded-t-lg bg-primary">
+              Preview
+            </div>
             <Preview html={html} tailwindConfig={tailwindConfig} />
 
-            <div className="p-2 mt-2 mb-1 text-white bg-yellow-300 rounded-t">Tailwind Config</div>
-            <Editor content={tailwindConfig} language="javascript" onChangeContent={handleChangeTailwindConfig} />
+            <div className="p-2 mt-2 text-lg text-white rounded-t-lg bg-primary">
+              Tailwind Config
+            </div>
+            <Editor
+              content={tailwindConfig}
+              language="javascript"
+              onChangeContent={handleChangeTailwindConfig}
+            />
+            <div className="bg-[#1e1e1e] rounded-b-lg w-full h-1 p-1" />
+          </div>
         </div>
       </div>
-    </div>
 
-    <ComponentSelectorModal value={currentTemplate} setValue={setCurrentTemplate} />
+      <ComponentSelectorModal
+        value={currentTemplate}
+        setValue={setCurrentTemplate}
+      />
     </>
   )
 }

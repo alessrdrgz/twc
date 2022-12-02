@@ -1,14 +1,32 @@
 import Link from 'next/link'
+import { styled } from '@mui/material/styles'
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip'
 
-export default function HeaderLink ({ href, text }) {
+const CustomTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    boxShadow: theme.shadows[1],
+    fontSize: 18,
+    padding: '5px'
+  },
+  [`& .${tooltipClasses.arrow}`]: {
+    color: 'rgba(0, 0, 0, 0.9)'
+  }
+}))
+
+export default function HeaderLink({ href, text, Icon }) {
   return (
-    <li>
+    <CustomTooltip title={text} placement="left" arrow>
       <Link
         href={href}
-        class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-gray-500 md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-terciary md:bg-transparent  dark:hover:bg-zinc-700 dark:hover:text-white md:dark:hover:bg-transparent"
+        data-tip={text}
+        className="p-2 transition-all duration-200 ease-in-out group hover:bg-terciary rounded-2xl"
       >
-        {text}
+        <Icon className="w-10 h-10 fill-white group-hover:fill-background" />
       </Link>
-    </li>
+    </CustomTooltip>
   )
 }
