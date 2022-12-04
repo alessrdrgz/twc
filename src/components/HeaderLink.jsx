@@ -23,9 +23,9 @@ export default function HeaderLink({ href, text, Icon }) {
       <Link
         href={href}
         data-tip={text}
-        className="p-2 transition-all duration-200 ease-in-out group hover:bg-terciary rounded-2xl"
+        className="p-2 transition-all duration-200 ease-in-out group hover:bg-terciary rounded-2xl h-full w-full"
       >
-        <Icon className="w-10 h-10 fill-white group-hover:fill-background" />
+        <Icon className="w-10 h-10 fill-white text-white group-hover:fill-background" />
       </Link>
     </CustomTooltip>
   )
