@@ -9,7 +9,9 @@
       "@constants": ["/src/constants"],
       "@constants/*": ["/src/constants/*"],
       "@icons/*": ["/src/components/icons/*"],
-      "@icons": ["/src/components/icons"]
+      "@icons": ["/src/components/icons"],
+      "@utils": ["/src/utils"],
+      "@utils/*": ["/src/utils/*"]
     }
   }
 }
