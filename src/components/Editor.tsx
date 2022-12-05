@@ -19,15 +19,17 @@ export default function Editor({
       'monaco-tailwindcss'
     )
 
-    monaco.languages.css.cssDefaults.setOptions({
-      data: {
-        dataProviders: {
-          tailwindcssData
+    if (monaco.languages.css.cssDefaults.options.data.useDefaultDataProvider) {
+      monaco.languages.css.cssDefaults.setOptions({
+        data: {
+          dataProviders: {
+            tailwindcssData
+          }
         }
-      }
-    })
+      })
 
-    configureMonacoTailwindcss(monaco)
+      configureMonacoTailwindcss(monaco)
+    }
 
     const resizeObserver = new ResizeObserver(() => {
       editor.layout()
