@@ -1,11 +1,16 @@
 import { useRef, useState } from 'react'
 import { Switch } from '@headlessui/react'
 
-export default function Preview ({ html, tailwindConfig }) {
+interface PreviewProps {
+  html: string
+  tailwindConfig: string
+}
+
+export default function Preview({ html, tailwindConfig }: PreviewProps) {
   const [darkMode, setDarkMode] = useState(true)
   const iFrameRef = useRef(null)
 
-  const toggleDark = (value) => {
+  const toggleDark = (value: boolean) => {
     setDarkMode(value)
     iFrameRef.current?.contentWindow?.postMessage(value, '*')
   }
@@ -17,11 +22,15 @@ export default function Preview ({ html, tailwindConfig }) {
       } rounded-b-lg h-1/2 relative transition-colors duration-200`}
     >
       <div className="absolute flex flex-col items-center justify-center gap-2 top-2 right-2">
-        <span className={`${darkMode ? 'text-white' : 'text-black'}`}>{darkMode ? 'Dark' : 'Light'}</span>
+        <span className={`${darkMode ? 'text-white' : 'text-black'}`}>
+          {darkMode ? 'Dark' : 'Light'}
+        </span>
         <Switch
           checked={darkMode}
           onChange={toggleDark}
-          className={`${darkMode ? 'bg-blue-600' : 'bg-gray-200'} inline-flex h-6 w-11 items-center rounded-full`}
+          className={`${
+            darkMode ? 'bg-blue-600' : 'bg-gray-200'
+          } inline-flex h-6 w-11 items-center rounded-full`}
         >
           <span className="sr-only">Dark Mode</span>
           <span
@@ -43,7 +52,9 @@ export default function Preview ({ html, tailwindConfig }) {
                   window.onmessage = (e) => document.body.classList.toggle('dark', e.data)
                   
                 </script>
-                <body class="${darkMode ? 'dark' : ''} h-screen flex justify-center items-center">
+                <body class="${
+                  darkMode ? 'dark' : ''
+                } h-screen flex justify-center items-center">
                   ${html}
                 </body>
         `}

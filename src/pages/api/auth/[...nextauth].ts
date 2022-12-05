@@ -11,7 +11,7 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
         return {
-          id: profile.id,
+          id: profile.id.toString(),
           name: profile.name,
           email: profile.email,
           image: profile.avatar_url,

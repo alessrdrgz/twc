@@ -2,21 +2,20 @@
 
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import LogoutIcon from '@mui/icons-material/LogoutRounded'
-import { useUser } from 'src/hooks/useUser'
 
 export default function Example() {
-  const user = useUser()
+  const { data: session } = useSession()
 
-  if (user) {
+  if (session) {
     return (
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="w-full rounded-full">
             <Image
-              src={user.image}
+              src={session.user.image}
               className="rounded-full"
               alt="User avatar"
               width={50}
@@ -36,7 +35,7 @@ export default function Example() {
           <Menu.Items className="absolute right-0 p-0.5 mt-2 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg w-max bg-bglight ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
-                {({ active }) => (
+                {() => (
                   <button
                     className="flex items-center w-full px-2 py-2 text-sm text-white rounded-md group bg-background hover:bg-terciary hover:text-background"
                     onClick={() => signOut()}

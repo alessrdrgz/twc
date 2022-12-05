@@ -8,7 +8,17 @@ const defaultConfig = dedent`tailwind.config = {
                               plugins: []
                             }`
 
-export const TEMPLATES = {
+export enum TemplateTypes {
+  BUTTON = 'button',
+  INPUT = 'input'
+}
+
+interface Template {
+  html: string
+  config: string
+}
+
+export const TEMPLATES: Record<TemplateTypes, Template> = {
   button: {
     html: dedent`<button class="group flex items-center overflow-hidden rounded-xl border-none bg-[royalblue] py-[0.7em] px-[1em] pl-[0.9em] text-[20px] text-white transition-all duration-200 active:scale-95">
                   <div class="group-hover:animate-fly ease-in-out">

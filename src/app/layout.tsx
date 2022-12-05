@@ -6,7 +6,7 @@ import { Bitter } from '@next/font/google'
 const font = Bitter({
   weight: '400',
   display: 'swap',
-  subsets: ['chinese-simplified'],
+  subsets: ['latin'],
   variable: '--font-primary'
 })
 

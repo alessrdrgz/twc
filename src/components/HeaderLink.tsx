@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { styled } from '@mui/material/styles'
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip'
+import { SvgIconTypeMap } from '@mui/material'
+import { OverridableComponent } from '@mui/material/OverridableComponent'
 
-const CustomTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
+const CustomTooltip = styled(Tooltip)(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     color: 'rgba(255, 255, 255, 0.8)',
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -17,7 +17,14 @@ const CustomTooltip = styled(({ className, ...props }) => (
   }
 }))
 
-export default function HeaderLink({ href, text, Icon }) {
+interface HeaderLinkProps {
+  href: string
+  text: string
+  Icon: OverridableComponent<SvgIconTypeMap<{ className: string }, 'svg'>> & {
+    muiName: string
+  }
+}
+export default function HeaderLink({ href, text, Icon }: HeaderLinkProps) {
   return (
     <CustomTooltip title={text} placement="left" arrow>
       <Link

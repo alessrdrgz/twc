@@ -1,4 +1,6 @@
-export default function ButtonIcon (props) {
+import { IconProps } from '@interfaces/IconProps'
+
+export default function ButtonIcon(props: IconProps) {
   return (
     <svg
       viewBox="0 0 64 64"

@@ -1,4 +1,5 @@
-export default function InputIcons (props) {
+import {type IconProps} from "@interfaces/IconProps"
+export default function InputIcons (props: IconProps) {
   return (
     <svg
       fill="currentColor"

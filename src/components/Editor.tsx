@@ -1,10 +1,20 @@
 'use client'
 
-import MonacoEditor from '@monaco-editor/react'
+import MonacoEditor, { type OnMount } from '@monaco-editor/react'
 import Spinner from '@components/Spinner'
 
-export default function Editor({ content, language, onChangeContent }) {
-  const handleEditorMount = async (editor, monaco) => {
+interface EditorProps {
+  content: string
+  language: string
+  onChangeContent: (value: string) => void
+}
+
+export default function Editor({
+  content,
+  language,
+  onChangeContent
+}: EditorProps) {
+  const handleEditorMount: OnMount = async (editor, monaco) => {
     const { tailwindcssData, configureMonacoTailwindcss } = await import(
       'monaco-tailwindcss'
     )

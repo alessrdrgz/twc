@@ -7,8 +7,18 @@ import LoginButton from '@components/LoginButton'
 import UserMenu from '@components/UserMenu'
 import HomeIcon from '@mui/icons-material/HomeRounded'
 import SearchIcon from '@mui/icons-material/SearchRounded'
+import { SvgIconTypeMap } from '@mui/material'
+import { OverridableComponent } from '@mui/material/OverridableComponent'
 
-const HeaderLinks = [
+interface HeaderLink {
+  text: string
+  href: string
+  Icon: OverridableComponent<SvgIconTypeMap<{ className: string }, 'svg'>> & {
+    muiName: string
+  }
+}
+
+const HeaderLinks: Array<HeaderLink> = [
   {
     text: 'Home',
     href: '/',
