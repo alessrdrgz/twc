@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { prisma } from '@utils/db'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
@@ -16,7 +16,7 @@ export const authOptions = {
           email: profile.email,
           image: profile.avatar_url,
           username: profile.login
-        }
+        } as User
       }
     })
   ],
